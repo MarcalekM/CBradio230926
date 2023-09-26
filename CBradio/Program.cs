@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -36,6 +36,21 @@ namespace CBradio
                 path: @"..\..\..\src.cb2.txt",
                 append: false,
                 encoding: Encoding.UTF8);
+            sw.WriteLine("Kezdes;Nev;AdasDb");
+            foreach (var h in hivasok)
+            {
+                sw.WriteLine($"{h.IdoPercben};{h.Nev};{h.AdasDB}");
+            }
+
+            var f8 = hivasok
+                .GroupBy(h => h.Nev)
+                .ToDictionary(n => n.Key, hsz => hsz.Sum(h => h.AdasDB));
+            Console.WriteLine($"8. feladat: A sofőrök száma: {f8.Count} fő");
+
+            var f9 = f8.OrderBy(kvp => kvp.Value).Last();
+            Console.WriteLine("9. feladat:");
+            Console.WriteLine($"A legtöbbb adást indító sofőr: {f9.Key}");
+            Console.WriteLine($"{f9.Value} alkalommal");
         }
     }
 }
