@@ -1,4 +1,4 @@
-﻿using System;
+using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Text;
@@ -11,14 +11,15 @@ namespace CBradio
         public TimeSpan OraPerc { get; set; }
         public int AdasDB { get; set; }
         public string Nev { get; set; }
-        piblic int 
+        public int IdoPercben => (int)OraPerc.TotalMinutes;
 
         public Hivas(string r)
         {
             var v = r.Split(';');
             OraPerc = new TimeSpan(
-                hours: int.Parse(v[0])
-                minutes: int.Parse(v[1]));
+                hours: int.Parse(v[0]),
+                minutes: int.Parse(v[1]),
+                seconds: 0);
             AdasDB = int.Parse(v[2]);
             Nev = v[3];
         }
